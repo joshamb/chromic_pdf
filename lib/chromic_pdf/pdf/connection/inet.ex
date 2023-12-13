@@ -61,6 +61,8 @@ if Code.ensure_loaded?(WebSockex) do
       headers = [{'accept', 'application/json'}]
       http_request_opts = [ssl: [verify: :verify_none]]
 
+      IO.inspect(:httpc.request(:get, {url, headers}, http_request_opts, []), label: "httpc.request response")
+
       case :httpc.request(:get, {url, headers}, http_request_opts, []) do
         {:ok, {_, _, body}} ->
           body

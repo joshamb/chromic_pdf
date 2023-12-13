@@ -5,10 +5,10 @@ defmodule ChromicPDF.ChromeRunner do
 
   @spec port_open(keyword()) :: port()
   def port_open(opts) do
-    port_opts = append_if([:binary], :nouse_stdio, !discard_stderr?(opts))
+#    port_opts = append_if([:binary], :nouse_stdio, !discard_stderr?(opts))
     port_cmd = shell_command("--remote-debugging-pipe", opts)
 
-    Port.open({:spawn, port_cmd}, port_opts)
+    Port.open({:spawn, port_cmd}, [])
   end
 
   @spec warm_up(keyword()) :: {:ok, binary()}
@@ -44,6 +44,7 @@ defmodule ChromicPDF.ChromeRunner do
   @default_executables [
     "chromium-browser",
     "chromium",
+    "chrome",
     "chrome.exe",
     "google-chrome",
     "/usr/bin/chromium-browser",
@@ -129,7 +130,7 @@ defmodule ChromicPDF.ChromeRunner do
     |> append_if("--no-sandbox", no_sandbox?(opts))
     |> append_if(to_string(opts[:chrome_args]), !!opts[:chrome_args])
     |> Kernel.++(List.wrap(extra))
-    |> append_if("2>/dev/null 3<&0 4>&1", discard_stderr?(opts))
+#    |> append_if("2>NUL 3<&0 4>&1", discard_stderr?(opts))
   end
 
   defp append_if(list, _value, false), do: list

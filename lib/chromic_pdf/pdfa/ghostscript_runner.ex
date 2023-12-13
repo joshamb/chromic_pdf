@@ -6,7 +6,7 @@ defmodule ChromicPDF.GhostscriptRunner do
   import ChromicPDF.Utils, only: [system_cmd!: 3]
 
   @default_args [
-    "-sstdout=/dev/null",
+#    "-sstdout=/NUL",
     "-dQUIET",
     "-dBATCH",
     "-dNOPAUSE",

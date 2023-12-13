@@ -33,7 +33,7 @@ defmodule ChromicPDF.TestDockerChrome do
         " "
       )
 
-    port = Port.open({:spawn, "#{port_cmd} 2>/dev/null"}, [:binary])
+    port = Port.open({:spawn, "#{port_cmd}"}, [:binary])
     os_pid = port |> Port.info() |> Keyword.fetch!(:os_pid)
 
     Process.flag(:trap_exit, true)
